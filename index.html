@@ -2,24 +2,11 @@
 <html>
 <head>
   <title>glb-viewer</title>
-  <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
-  <!-- https://github.com/fernandojsg/aframe-teleport-controls -->
-  <script src="https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js"></script>
 </head>
 <body>
-<a-scene background="color: #333">
-  <a-assets timeout="10000">
-    <a-asset-item id="sabae" src="./20211015-jig8big.glb"></a-asset-item>
-  </a-assets>
-  <a-entity gltf-model="#sabae" position="0 2 0"></a-entity>
-  <a-entity light="type: ambient; color: #FFF"></a-entity>
-  <a-entity light="type: directional; color: #FFF; intensity: 1" position="-0 2 1"></a-entity>
-    <!--<a-plane color="#888" height="300" width="300" rotation="-90 0 0"></a-plane>-->
-  <a-entity id="cameraRig">
-    <a-entity id="head" camera position="0 1.7 0" wasd-controls look-controls></a-entity>
-    <a-entity oculus-touch-controls="hand:left" teleport-controls="button:trigger; collisionEntities:.collidable; cameraRig:#cameraRig; teleportOrigin:#head;"></a-entity>
-    <a-entity oculus-touch-controls="hand:right" teleport-controls="button:trigger; collisionEntities:.collidable; cameraRig:#cameraRig; teleportOrigin:#head;"></a-entity>
-  </a-entity>
-</a-scene>
+
+<h1>glb-viewer</h1>
+- <a href=eightsense.html>EIGHT SENSE</a><br>
+- <a href=jig-mtg-room.html>jig.jp 8F 会議室</a><br>
 </body>
 </html>
