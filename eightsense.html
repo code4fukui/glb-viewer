@@ -1,20 +1,35 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>glb-viewer</title>
-  <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
-  <!-- https://github.com/fernandojsg/aframe-teleport-controls -->
-  <script src="https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js"></script>
+<!DOCTYPE html><html><head>
+<title>glb-viewer</title>
+<script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
+<script src="https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js"></script>
+<script type="module">
+onload = async () => {
+    let th = -2.5;
+    const tick = () => {
+        const x = Math.cos(th);
+        const y = 1.3;
+        const z = Math.sin(th);
+        sphere.setAttribute("position", { x, y, z });
+        const r = Math.cos(th) * .02 + .1;
+        sphere.setAttribute("radius", r);
+        th += .03;
+        requestAnimationFrame(tick);    
+    };
+    tick();
+};
+</script>
 </head>
+
 <body>
-<a-scene background="color: #333">
+<a-scene id="scene" background="color: black">
   <a-assets timeout="10000">
-    <a-asset-item id="sabae" src="./eightsense.glb"></a-asset-item>
+    <a-asset-item id="sabae" src="https://code4fukui.github.io/glb-viewer/eightsense.glb"></a-asset-item>
   </a-assets>
-  <a-entity gltf-model="#sabae" position="0 0 0"></a-entity>
+  <a-entity gltf-model="#sabae" position="0 .3 0"></a-entity>
   <a-entity light="type: ambient; color: #FFF"></a-entity>
   <a-entity light="type: directional; color: #FFF; intensity: 1" position="-0 2 1"></a-entity>
     <!--<a-plane color="#888" height="300" width="300" rotation="-90 0 0"></a-plane>-->
+  <a-sphere id="sphere" color="#f22"></a-sphere>
   <a-entity id="cameraRig">
     <a-entity id="head" camera position="0 1.7 0" wasd-controls look-controls></a-entity>
     <a-entity oculus-touch-controls="hand:left" teleport-controls="button:trigger; collisionEntities:.collidable; cameraRig:#cameraRig; teleportOrigin:#head;"></a-entity>
