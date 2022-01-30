@@ -1,0 +1,22 @@
+{
+  "name": "glb-viewer",
+  "version": "1.0.0",
+  "description": "https://code4fukui.github.io/glb-viewer/",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/code4fukui/glb-viewer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/code4fukui/glb-viewer/issues"
+  },
+  "homepage": "https://github.com/code4fukui/glb-viewer#readme",
+  "dependencies": {
+    "gltf-pipeline": "^3.0.4"
+  }
+}
