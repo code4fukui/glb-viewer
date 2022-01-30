@@ -22,3 +22,9 @@ npm i
 deno run -A extractImageFromGLTF.js fn.gltf
 ```
 
+## remake gltf with texture images
+
+```
+deno run -A remakeGLTF.js fn.gltf fn-texture.jpg
+```
+
