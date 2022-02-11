@@ -55,7 +55,7 @@ let KEYS = [
 /**
  * WASD component to control entities using WASD keys.
  */
-AFRAME.registerComponent("drone-controls", {
+AFRAME.registerComponent("drone-controls-mode2", {
   schema: {
     acceleration: { default: 65 },
     adAxis: {default: 'x', oneOf: ['x', 'y', 'z']},
@@ -138,7 +138,6 @@ AFRAME.registerComponent("drone-controls", {
     let keys = this.keys;
     let velocity = this.velocity;
     let wsAxis;
-    let wsSign;
 
     adAxis = data.adAxis;
     wsAxis = data.wsAxis;
@@ -178,24 +177,34 @@ AFRAME.registerComponent("drone-controls", {
     
     if (!data.enabled) { return; }
 
+    const mode2 = true;
+
     // Update velocity using keys pressed.
     acceleration = data.acceleration;
     if (data.adEnabled) {
       adSign = data.adInverted ? -1 : 1;
-      //if (keys.KeyA || keys.ArrowLeft) { velocity[adAxis] -= adSign * acceleration * delta; }
-      //if (keys.KeyD || keys.ArrowRight) { velocity[adAxis] += adSign * acceleration * delta; }
       if (keys.ArrowLeft) { velocity[adAxis] -= adSign * acceleration * delta; }
       if (keys.ArrowRight) { velocity[adAxis] += adSign * acceleration * delta; }
     }
     if (data.wsEnabled) {
-      wsSign = data.wsInverted ? -1 : 1;
-      if (keys.KeyW) { velocity[wsAxis] -= wsSign * acceleration * delta; }
-      if (keys.KeyS) { velocity[wsAxis] += wsSign * acceleration * delta; }
+      if (mode2) {
+        const wsSign = data.wsInverted ? -1 : 1;
+        if (keys.ArrowUp) { velocity[wsAxis] -= wsSign * acceleration * delta; }
+        if (keys.ArrowDown) { velocity[wsAxis] += wsSign * acceleration * delta; }
+      } else {
+        if (keys.KeyW) { velocity[wsAxis] -= wsSign * acceleration * delta; }
+        if (keys.KeyS) { velocity[wsAxis] += wsSign * acceleration * delta; }
+      }
     }
     if (data.yEnabled) {
       const ySign = data.yInverted ? -1 : 1;
-      if (keys.ArrowDown) { velocity[yAxis] -= ySign * acceleration * delta; }
-      if (keys.ArrowUp) { velocity[yAxis] += ySign * acceleration * delta; }
+      if (mode2) {
+        if (keys.KeyS) { velocity[yAxis] -= ySign * acceleration * delta; }
+        if (keys.KeyW) { velocity[yAxis] += ySign * acceleration * delta; }
+      } else {
+        if (keys.ArrowDown) { velocity[yAxis] -= ySign * acceleration * delta; }
+        if (keys.ArrowUp) { velocity[yAxis] += ySign * acceleration * delta; }
+      }
     }
     if (data.roleEnabled) {
       if (keys.KeyA) { this.rotationx -= adSign * acceleration * delta; }
