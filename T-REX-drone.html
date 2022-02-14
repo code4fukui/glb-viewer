@@ -26,7 +26,7 @@
     <!--<a-plane color="#888" height="300" width="300" rotation="-90 0 0"></a-plane>-->
     <!-- <a-sphere id="sphere" color="#f22"></a-sphere> -->
   <a-entity id="cameraRig">
-    <a-entity id="head" camera position="0 1.7 0"  wasd-controls look-controls></a-entity>
+    <a-entity id="head" camera position="0 1.7 0" drone-controls-mode2></a-entity>
     <a-entity oculus-touch-controls="hand:left" teleport-controls="button:trigger; collisionEntities:.collidable; cameraRig:#cameraRig; teleportOrigin:#head;"></a-entity>
     <a-entity oculus-touch-controls="hand:right" teleport-controls="button:trigger; collisionEntities:.collidable; cameraRig:#cameraRig; teleportOrigin:#head;"></a-entity>
   </a-entity>
