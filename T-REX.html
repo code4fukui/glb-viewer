@@ -1,0 +1,35 @@
+<!DOCTYPE html><html><head>
+<title>scc-B1F glb-viewer</title>
+<!-- 
+<script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+-->
+<script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
+<script src="https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js"></script>
+<script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
+<script type="module" src="./drone-controls-mode2.js"></script>
+</head>
+
+<body>
+<a-scene id="scene" background="color: #333" renderer="colorManagement: true">
+  <!-- 1.2.0 では動かない
+    "contact", "egypt", "checkerboard チェッカー", "forest 森チェッカー", "goaland キノコ", "yavapai 砂漠",
+    "goldmine 金の棒", "threetowers 塔", "poison 毒毒しい", "arches 岩場",
+    "tron チェッカー", "japan 鳥居", "dream 小さいキノコ", "volcano 火山", "starry チェッカー風", "osiris ピラミッド"
+  -->
+  <a-entity id="environment" environment="preset:arches"></a-entity>
+  <a-assets timeout="10000">
+    <a-asset-item id="sabae" src="./T-REX.glb"></a-asset-item>
+    <!-- 3Dモデル ティラノサウルス 恐竜 T-REX　無料 https://booth.pm/ja/items/2309013 by pirero -->
+  </a-assets>
+  <a-entity gltf-model="#sabae" position="-.5 0 -3.5"></a-entity>
+  <a-entity light="type: ambient; color: #FFF"></a-entity>
+    <!--<a-plane color="#888" height="300" width="300" rotation="-90 0 0"></a-plane>-->
+    <!-- <a-sphere id="sphere" color="#f22"></a-sphere> -->
+  <a-entity id="cameraRig">
+    <a-entity id="head" camera position="0 1.7 0" drone-controls-mode2></a-entity>
+    <a-entity oculus-touch-controls="hand:left" teleport-controls="button:trigger; collisionEntities:.collidable; cameraRig:#cameraRig; teleportOrigin:#head;"></a-entity>
+    <a-entity oculus-touch-controls="hand:right" teleport-controls="button:trigger; collisionEntities:.collidable; cameraRig:#cameraRig; teleportOrigin:#head;"></a-entity>
+  </a-entity>
+</a-scene>
+</body>
+</html>
