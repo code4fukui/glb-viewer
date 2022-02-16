@@ -1,0 +1,41 @@
+<!DOCTYPE html><html><head>
+<title>cafe-slim glb-viewer</title>
+<script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+<script src="https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js"></script>
+<!--
+  <script type="module" src="./drone-controls-mode2.js"></script>
+-->
+<script type="module" src="./wasd-controls-mode2.js"></script>
+<script type="module">
+onload = () => {
+  setTimeout(() => {
+    cake.setAttribute("position", { x: -1.1, y: .48, z: 3 });
+  }, 1000);
+  cake.addEventListener("click", () => {
+    window.open("https://slim.velvet.jp/", "_blank");
+  });
+};
+</script>
+</head>
+
+<body>
+<a-scene id="scene" background="color: #4080e0" renderer="colorManagement: true">
+  <a-assets timeout="10000">
+    <a-asset-item id="base-asset" src="./cafe-slim.glb"></a-asset-item>
+    <a-asset-item id="cake-asset" src="./cafe-slim-cake-reduced-jpg.glb"></a-asset-item>
+  </a-assets>
+  <a-entity gltf-model="#base-asset" position="0 0 0"></a-entity>
+  <a-entity id="cake" gltf-model="#cake-asset" position="-1.1 .48 300" scale="1 1 1"></a-entity>
+  <a-entity light="type: ambient; color: #FFF"></a-entity>
+    <!--<a-plane color="#888" height="300" width="300" rotation="-90 0 0"></a-plane>-->
+    <!-- <a-sphere id="sphere" color="#f22"></a-sphere> -->
+  <a-entity id="cameraRig" position="-5.5 0 -2" rotation="0 -160 0">
+    <a-entity id="head" camera position="0 1.7 0" wasd-controls-mode2 look-controls x-drone-controls-mode2>
+      <a-entity cursor="rayOrigin: mouse"></a-entity>
+    </a-entity>
+    <a-entity oculus-touch-controls="hand:left" teleport-controls="button:trigger; collisionEntities:.collidable; cameraRig:#cameraRig; teleportOrigin:#head;"></a-entity>
+    <a-entity oculus-touch-controls="hand:right" teleport-controls="button:trigger; collisionEntities:.collidable; cameraRig:#cameraRig; teleportOrigin:#head;"></a-entity>
+  </a-entity>
+</a-scene>
+</body>
+</html>
