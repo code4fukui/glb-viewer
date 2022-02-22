@@ -1,0 +1,46 @@
+<!DOCTYPE html><html><head>
+<title>バーチャル鯖江市佐々木市長 in SLIM The Coffee Resort - glb-viewer</title>
+<script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+<script src="https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js"></script>
+<script type="module" src="./wasd-controls-mode2.js"></script>
+<script type="module" src="./mc-controls.js"></script>
+</head>
+
+<script type="module">
+  /*
+AFRAME.registerComponent('collider-check', {
+    dependencies: ['raycaster'],
+    init: function () {
+        this.el.addEventListener('raycaster-intersection', function () {
+            window.open("https://jp.cic.com/", "_blank");
+        });
+        this.el.addEventListener('raycaster-intersection-cleared', function () {
+          console.log("out");
+        });
+    }
+});
+*/
+</script>
+<body>
+<a-scene id="scene" background="color: #77ADD1" renderer="colorManagement: true">
+  <a-assets timeout="10000">
+    <a-asset-item id="mayer1" src="./sasaki-mayer1.glb"></a-asset-item>
+    <a-asset-item id="mayer2" src="./sasaki-mayer2.glb"></a-asset-item>
+    <a-asset-item id="slim" src="https://code4fukui.github.io/cafe-slim/cafe-slim.glb"></a-asset-item>
+  </a-assets>
+  <a-entity gltf-model="#mayer1" position="0 0 -1" rotation="0 0 0"></a-entity>
+  <a-entity gltf-model="#mayer2" position="0 0 -1" rotation="0 0 0"></a-entity>
+  <a-entity gltf-model="#slim" position="-.8 -.2 1" rotation="0 0 0"></a-entity>
+  <a-entity light="type: ambient; color: #FFF"></a-entity>
+    <!--<a-plane color="#888" height="300" width="300" rotation="-90 0 0"></a-plane>-->
+  <!--
+    <a-sphere id="sphere" color="#222" position="0 1 -3" class="collidable"></a-sphere>
+  -->
+  <a-entity id="cameraRig">
+    <a-entity id="head" camera position="0 1.7 0" mc-controls x-wasd-controls-mode2 look-controls x-drone-controls-mode2 raycaster="objects: .collidable; far: 0.5;" collider-check></a-entity>
+    <a-entity oculus-touch-controls="hand:left" teleport-controls="button:trigger; collisionEntities:.collidable; cameraRig:#cameraRig; teleportOrigin:#head;"></a-entity>
+    <a-entity oculus-touch-controls="hand:right" teleport-controls="button:trigger; collisionEntities:.collidable; cameraRig:#cameraRig; teleportOrigin:#head;"></a-entity>
+  </a-entity>
+</a-scene>
+</body>
+</html>
