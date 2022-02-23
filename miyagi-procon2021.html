@@ -11,16 +11,22 @@
 <body>
 <a-scene id="scene" background="color: #4080e0" renderer="colorManagement: true">
   <a-assets timeout="10000">
-    <a-asset-item id="sabae" src="./miyagi-procon2021.glb"></a-asset-item>
+    <a-asset-item id="base" src="./miyagi-procon2021.glb"></a-asset-item>
+    <a-asset-item id="maskpone" src="./miyagi-maskpone.glb"></a-asset-item>
   </a-assets>
-  <a-entity gltf-model="#sabae" position="0 0 0"></a-entity>
+  <a-entity gltf-model="#base" position="0 0 0"></a-entity>
+  <a-entity gltf-model="#maskpone" position="2.5 1 -1"></a-entity>
   <a-entity light="type: ambient; color: #FFF"></a-entity>
     <!--<a-plane color="#888" height="300" width="300" rotation="-90 0 0"></a-plane>-->
     <!-- <a-sphere id="sphere" color="#f22"></a-sphere> -->
-  <a-entity id="cameraRig">
+  <a-entity id="cameraRig" position="2.5 0 0">
     <a-entity id="head" camera position="0 1.7 0" mc-controls look-controls x-drone-controls-mode2></a-entity>
+    <!--
     <a-entity oculus-touch-controls="hand:left" teleport-controls="button:trigger; collisionEntities:.collidable; cameraRig:#cameraRig; teleportOrigin:#head;"></a-entity>
     <a-entity oculus-touch-controls="hand:right" teleport-controls="button:trigger; collisionEntities:.collidable; cameraRig:#cameraRig; teleportOrigin:#head;"></a-entity>
+    -->
+    <a-entity id="leftHand" hand-tracking-controls="hand: left;"></a-entity>
+    <a-entity id="rightHand" hand-tracking-controls="hand: right;"></a-entity>
   </a-entity>
 </a-scene>
 </body>
