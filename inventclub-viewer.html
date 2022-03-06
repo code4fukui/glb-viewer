@@ -1,0 +1,134 @@
+<!DOCTYPE html><html><head>
+<title>福井市発明クラブ - glb-viewer</title>
+<script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+<script src="https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js"></script>
+<!--
+  <script type="module" src="./drone-controls-mode2.js"></script>
+-->
+<script type="module" src="./mc-controls.js"></script>
+
+<script type="module">
+
+const campos = [
+  {"pos":{"x":-11.068352829392678,"y":1.7,"z":-7.534274196730894},"rot":{"x":-2.4064227395494564,"y":-130.74896884885348,"z":0}},
+  //{"pos":{"x":-9.122947747519216,"y":0.9460868934787566,"z":-5.868233371302352},"rot":{"x":-1.4896902673401433,"y":-100.72598038399855,"z":0}},
+  {"pos":{"x":-6.75789690608991,"y":0.9460868934787566,"z":-8.044929379942642},"rot":{"x":-2.63560585760179,"y":-134.759673414769,"z":0}},
+  //{"pos":{"x":-2.3777875263682136,"y":0.9460868934787566,"z":-3.7014113842822005},"rot":{"x":-2.63560585760179,"y":-134.759673414769,"z":0}},
+  {"pos":{"x":-2.3863291405309925,"y":1.7175799735084238,"z":-3.710162561782215},"rot":{"x":-10.54242343040716,"y":-200.76441141383978,"z":0}},
+  {"pos":{"x":1.7043179772576296,"y":1.7175799735084238,"z":1.4182336809223157},"rot":{"x":-16.2720013817154,"y":-43.31560931188914,"z":0}},
+  {"pos":{"x":8.119587623057242,"y":1.7175799735084238,"z":-3.26000104604303},"rot":{"x":-17.990874767107865,"y":59.587610693606734,"z":0}},
+  {"pos":{"x":8.119594979263669,"y":5.644922148685502,"z":-3.2599967280438933},"rot":{"x":-46.638764523649044,"y":80.90164067247338,"z":0}},
+];
+/*
+const campos = [
+  {"pos":{"x":-8.768550087946288,"y":1.7,"z":-7.357636034276836},"rot":{"x":-12.375888374825786,"y":-105.30964274504532,"z":0}},
+  {"pos":{"x":1.0117896767679577,"y":5.849632609269138,"z":-4.512318562568727},"rot":{"x":-46.065806728518204,"y":-77.92226013779195,"z":0}},
+  {"pos":{"x":-2.969019721201084,"y":1.0929121581839096,"z":-0.14556103707261558},"rot":{"x":-28.64788975654116,"y":-22.11617089204972,"z":0}},
+];
+*/
+
+const stringifyArray = (ar) => {
+  const s = [];
+  s.push("const campos = [");
+  ar.forEach(a => {
+    s.push("  " + JSON.stringify(a) + ",");
+  });
+  s.push("];")
+  return s.join("\n");
+};
+
+const easeNone = (t) => t;
+
+const easeIn = (t) => t * t;
+
+const easeInOut = (t) => {
+  t *= 2;
+  if (t < 1) {
+		return .5 * t * t * t;
+  }
+	t -= 2;
+  return .5 * (t * t * t + 2);
+};
+
+const calcLoc = (c1, c2, dt) => {
+  const res = {};
+  for (name in c1) {
+    if (typeof c1[name] == "object") {
+      res[name] = calcLoc(c1[name], c2[name], dt);
+    } else {
+      res[name] = c1[name] + (c2[name] - c1[name]) * dt;
+    }
+  }
+  return res;
+};
+
+onload = async () => {
+  /*
+  const locs = [];
+  document.body.addEventListener("keydown", (e) => {
+    console.log(e.key);
+    if (e.key == "Escape") {
+      locs.splice(0); // clear array
+    }
+    if (e.key == "Enter") {
+      const pos = head.getAttribute("position");
+      const rot = head.getAttribute("rotation");
+      locs.push({ pos: pos.clone(), rot: { x: rot.x, y: rot.y, z: rot.z } });
+      
+      console.log(stringifyArray(locs));
+      //console.log(JSON.stringify(locs.map(a => JSON.stringify(a)), null, 2));
+    }
+  });
+  */
+  let n = 0;
+  let n2 = 1;
+  let frame = 0;
+  const fps = 60;
+  const animtime = 12 * 1000;
+  const animframe = Math.floor(animtime / fps);
+  setInterval(() => {
+    if (frame > animframe) {
+      n++;
+      if (n == campos.length) {
+        n = 0;
+      }
+      n2++;
+      if (n2 == campos.length) {
+        n2 = 0;
+      }
+      frame = 0;
+    }
+    const dt = frame / animframe;
+    //const dt2 = easeNone(dt);
+    //const dt2 = easeIn(dt);
+    const dt2 = easeInOut(dt);
+    const c = calcLoc(campos[n], campos[n2], dt2);
+    head.setAttribute("position", c.pos);
+    head.setAttribute("rotation", c.rot);
+    frame++;
+  }, 1000 / fps);
+};
+</script>
+</head>
+
+<body>
+<a-scene id="scene" background="color: #4080e0" renderer="colorManagement: true">
+  <a-assets timeout="10000">
+    <a-asset-item id="base" src="./inventclub.glb"></a-asset-item>
+  </a-assets>
+  <a-entity gltf-model="#base" position="0 0 -2" scale="1 1 1" rotation="0 180 0"></a-entity>
+  <a-entity light="type: ambient; color: #FFF"></a-entity>
+    <!--<a-plane color="#888" height="300" width="300" rotation="-90 0 0"></a-plane>-->
+    <!-- <a-sphere id="sphere" color="#f22"></a-sphere> -->
+  <a-entity id="cameraRig" position="0 0 0">
+    <a-entity id="head" camera position="0 1.7 0" mc-controls x-look-controls x-drone-controls-mode2></a-entity>
+    <a-entity oculus-touch-controls="hand:left" teleport-controls="button:trigger; collisionEntities:.collidable; cameraRig:#cameraRig; teleportOrigin:#head;"></a-entity>
+    <a-entity oculus-touch-controls="hand:right" teleport-controls="button:trigger; collisionEntities:.collidable; cameraRig:#cameraRig; teleportOrigin:#head;"></a-entity>
+    <!--
+    <a-entity id="leftHand" hand-tracking-controls="hand: left;"></a-entity>
+    <a-entity id="rightHand" hand-tracking-controls="hand: right;"></a-entity>
+    -->
+    </a-entity>
+</a-scene>
+</body>
+</html>
