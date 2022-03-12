@@ -1,0 +1,51 @@
+<!DOCTYPE html><html><head>
+<title>glb-viewer</title>
+<script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+<script src="https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js"></script>
+<!--
+  <script type="module" src="./drone-controls-mode2.js"></script>
+-->
+<script type="module" src="./mc-controls.js"></script>
+
+<script type="module">
+onload = async () => {
+  // http://127.0.0.1:59715/glb-viewer.html#url=./inventclub.glb
+  // http://127.0.0.1:59715/glb-viewer.html#url=https://code4fukui.github.io/glb-viewer/inventclub.glb
+  const url = location.hash.substring("#url=".length);
+  console.log(url);
+  const asset = document.createElement("a-asset-item");
+  asset.setAttribute("id", "base");
+  //asset.setAttribute("src", "./inventclub.glb");
+  asset.setAttribute("src", url);
+  assets.appendChild(asset);
+  //<a-entity gltf-model="#base" position="0 0 -2" scale="1 1 1" rotation="0 0 0"></a-entity>
+  const en = document.createElement("a-entity");
+  en.setAttribute("gltf-model", "#base");
+  scene.appendChild(en);
+};
+</script>
+
+</head>
+
+<body>
+<a-scene id="scene" background="color: #4080e0" renderer="colorManagement: true">
+  <a-assets xtimeout="10000" id="assets">
+  </a-assets>
+  <a-entity light="type: ambient; color: #FFF"></a-entity>
+      <!--<a-plane color="#888" height="300" width="300" rotation="-90 0 0"></a-plane>-->
+      <!--
+  <a-sphere id="sphere" color="#f22"></a-sphere>
+      -->
+  
+  <a-entity id="cameraRig" position="0 0 0">
+    <a-entity id="head" camera position="0 1.7 0" mc-controls look-controls></a-entity>
+    <a-entity oculus-touch-controls="hand:left" teleport-controls="button:trigger; collisionEntities:.collidable; cameraRig:#cameraRig; teleportOrigin:#head;"></a-entity>
+    <a-entity oculus-touch-controls="hand:right" teleport-controls="button:trigger; collisionEntities:.collidable; cameraRig:#cameraRig; teleportOrigin:#head;"></a-entity>
+    <!--
+    <a-entity id="leftHand" hand-tracking-controls="hand: left;"></a-entity>
+    <a-entity id="rightHand" hand-tracking-controls="hand: right;"></a-entity>
+    -->
+    </a-entity>
+</a-scene>
+</body>
+</html>
