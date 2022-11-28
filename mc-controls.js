@@ -22,6 +22,7 @@ const KEYCODE_TO_CODE = {
   }
 //};
 
+const degToRad = deg => deg / 180 * Math.PI;
 /*
 let KEYCODE_TO_CODE = require('../constants').keyboardevent.KEYCODE_TO_CODE;
 let registerComponent = require('../core/component').registerComponent;
@@ -224,7 +225,7 @@ AFRAME.registerComponent("mc-controls", {
 
       // Transform direction relative to heading.
       const rotationEuler = new THREE.Euler(0, 0, 0, 'YXZ');
-      rotationEuler.set(THREE.Math.degToRad(xRotation), THREE.Math.degToRad(rotation.y), 0);
+      rotationEuler.set(degToRad(xRotation), degToRad(rotation.y), 0);
       directionVector.applyEuler(rotationEuler);
       return directionVector;
     };
