@@ -1,7 +1,6 @@
 # glb-viewer
- 
-https://code4fukui.github.io/glb-viewer/
 
+https://code4fukui.github.io/glb-viewer/
 
 ## glb2gltf
 
@@ -27,4 +26,3 @@ deno run -A extractImageFromGLTF.js fn.gltf
 ```
 deno run -A remakeGLTF.js fn.gltf fn-texture.jpg
 ```
-
