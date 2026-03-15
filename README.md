@@ -1,5 +1,7 @@
 # glb-viewer
 
+> 日本語のREADMEはこちらです: [README.ja.md](README.ja.md)
+
 https://code4fukui.github.io/glb-viewer/
 
 ## glb2gltf
@@ -26,3 +28,7 @@ deno run -A extractImageFromGLTF.js fn.gltf
 ```
 deno run -A remakeGLTF.js fn.gltf fn-texture.jpg
 ```
+
+## License
+
+MIT License
