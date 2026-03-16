@@ -2,33 +2,21 @@
 
 > 日本語のREADMEはこちらです: [README.ja.md](README.ja.md)
 
+A web application that can display 3D models in the glb format.
+
+## Demo
 https://code4fukui.github.io/glb-viewer/
 
-## glb2gltf
+## Features
+- Display glb files
+- Drone-like controls
+- Oculus Touch support for teleportation
 
-```
-npm i
-./node_modules/gltf-pipeline/bin/gltf-pipeline.js -i fn.glb -o fn.gltf
-```
+## Requirements
+None. The application runs in the browser.
 
-## gltf2glb
-
-```
-./node_modules/gltf-pipeline/bin/gltf-pipeline.js -i fn.gltf -o fn.glb
-```
-
-## extract texture images from gltf
-
-```
-deno run -A extractImageFromGLTF.js fn.gltf
-```
-
-## remake gltf with texture images
-
-```
-deno run -A remakeGLTF.js fn.gltf fn-texture.jpg
-```
+## Usage
+Open the web page in a browser.
 
 ## License
-
-MIT License
+MIT License — see [LICENSE](LICENSE).
