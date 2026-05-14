@@ -1,30 +1,19 @@
 # glb-viewer
- 
-https://code4fukui.github.io/glb-viewer/
 
+[
+![MIT License](https://img.shields.io/badge/License-MIT-green.svg)
+](LICENSE)
 
-## glb2gltf
+> 日本語のREADMEはこちらです: [README.ja.md](README.ja.md)
 
-```
-npm i
-./node_modules/gltf-pipeline/bin/gltf-pipeline.js -i fn.glb -o fn.gltf
-```
+A simple, browser-based 3D model viewer for the `.glb` and `.gltf` formats, built on [A-Frame](https://aframe.io/).
 
-## gltf2glb
+## Demo
 
-```
-./node_modules/gltf-pipeline/bin/gltf-pipeline.js -i fn.gltf -o fn.glb
-```
+-   **Main Demo:** [https://code4fukui.github.io/glb-viewer/](https://code4fukui.github.io/glb-viewer/)
 
-## extract texture images from gltf
+### Additional Examples
 
-```
-deno run -A extractImageFromGLTF.js fn.gltf
-```
-
-## remake gltf with texture images
-
-```
-deno run -A remakeGLTF.js fn.gltf fn-texture.jpg
-```
-
+-   Virtual Mayor Sasaki: [sasaki-mayer.html](https://code4fukui.github.io/glb-viewer/sasaki-mayer.html)
+-   Miyagi Programming Contest 2021: [miyagi-procon2021-calpis.html](https://code4fukui.github.io/glb-viewer/miyagi-procon2021-calpis.html)
+-   Fukui Shimbun Building: [fukui-shimbun.html](https://code4fukui.
